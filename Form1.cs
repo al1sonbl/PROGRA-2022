@@ -31,13 +31,13 @@ namespace Yoconda
             }
             conexion.Close();
 
-            SqlCommand cm1 = new SqlCommand("Select Cantidad from TCantidad", conexion);
             conexion.Open();
-            SqlDataReader dr1 = cm1.ExecuteReader();
-            while (dr1.Read())
-            {
-                comboBox1.Items.Add(dr1.GetInt32(0));
-            }
+            string cadena = "Select nombre_Producto,precio_Producto from TProducto";
+            SqlCommand comando = new SqlCommand(cadena, conexion);
+            SqlDataAdapter adpt = new SqlDataAdapter(comando);
+            DataTable tabla = new DataTable();
+            adpt.Fill(tabla);
+            dat.DataSource = tabla;
             conexion.Close();
 
         }
